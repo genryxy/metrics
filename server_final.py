@@ -107,7 +107,7 @@ def index():
                                   'Requests_per_country': Requests_per_country,
                                   'Average_num_of_requests_per_country':Average_num_of_requests_per_country}}}
 
-    check_error(result)
+    get_error(result)
 
 
 @app.route('/metries/<types>')
@@ -117,39 +117,39 @@ def index2(types):
     if types == 'suc_req':
         Successful_requests = make_query('Select Successful_requests from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Successful_requests': Successful_requests}
-        check_error(result)
+        return check_error(result)
     elif types == 'unq_us':
         Unique_users = make_query('Select Unq_users from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Unique_users': Unique_users}
-        check_error(result)
+        return check_error(result)
     elif types == 'countries':
         Countries = make_query('Select Countries from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Countries': Countries}
-        check_error(result)
+        return check_error(result)
     elif types == 'tod_us':
         Today_users = make_query('Select Today_users from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Today_users': Today_users}
-        check_error(result)
+        return check_error(result)
     elif types == 'Vis_vis_page':
         Visitings_of_the_most_visited_page = make_query('Select Visiting_most_visited_page from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Visitings_of_the_most_visited_page': Visitings_of_the_most_visited_page}
-        check_error(result)
+        return check_error(result)
     elif types == 'top_req_h':
         Top_requests_hour = make_query('Select Top_requests_hour from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Top_requests_hour': Top_requests_hour}
-        check_error(result)
+        return check_error(result)
     elif types == 'top_unq_us_h':
         Top_unique_users_hour = make_query('Select Top_unique_users_hour from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Top_unique_users_hour': Top_unique_users_hour}
-        check_error(result)
+        return check_error(result)
     elif types == 'unq_og_sites':
         Unique_outgoing_sites = make_query('Select Unq_outgoing_sites from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Unique_outgoing_sites': Unique_outgoing_sites}
-        check_error(result)
+        return check_error(result)
     elif types == 'eng_trans':
         English_translatings = make_query('Select English_translatings from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'English_translatings': English_translatings}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'unq_us_country':
         Unique_users_per_country3 = make_query('Select Unq_users_per_country from Metries_countries where Date ="' + date + '"')[0][0]
@@ -164,7 +164,7 @@ def index2(types):
             else:
                 Unique_users_per_country[Unique_users_per_country1[0]] = int(Unique_users_per_country1[1])
         result = {'Date':date, 'Unique_users_per_country': Unique_users_per_country}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'req_country':
         Requests_per_country3 = make_query('Select Requests_per_country from Metries_countries where Date ="' + date + '"')[0][0]
@@ -179,7 +179,7 @@ def index2(types):
             else:
                 Requests_per_country[Requests_per_country1[0]] = int(Requests_per_country1[1])
         result = {'Date':date, 'Requests_per_country': Requests_per_country}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'ave_req_country':
         Average_num_of_requests_per_country3 = make_query('Select Average_num_of_requests_per_country from Metries_countries where Date ="' + date + '"')[0][0]
@@ -194,7 +194,7 @@ def index2(types):
             else:
                 Average_num_of_requests_per_country[Average_num_of_requests_per_country1[0]] = float(Average_num_of_requests_per_country1[1])
         result = {'Date':date, 'Average_num_of_requests_per_country': Average_num_of_requests_per_country}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'int':
         Successful_requests, Unique_users, Countries, Today_users, Visitings_of_the_most_visited_page, Top_requests_hour, Top_unique_users_hour, Unique_outgoing_sites, English_translatings = chislo(date)
@@ -209,7 +209,7 @@ def index2(types):
                           'Top_unique_users_hour': Top_unique_users_hour,
                           'Unique_outgoing_sites': Unique_outgoing_sites,
                           'English_translatings': English_translatings}}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'str':
         Unique_users_per_country, Requests_per_country, Average_num_of_requests_per_country = stroka(date)
@@ -218,7 +218,7 @@ def index2(types):
                   'str': {'Unique_users_per_country': Unique_users_per_country,
                           'Requests_per_country': Requests_per_country,
                           'Average_num_of_requests_per_country': Average_num_of_requests_per_country}}
-        check_error(result)
+        return check_error(result)
 
     else:
         abort(404)
@@ -245,7 +245,7 @@ def index3():
                           'str': {'Unique_users_per_country':Unique_users_per_country,
                                   'Requests_per_country': Requests_per_country,
                                   'Average_num_of_requests_per_country':Average_num_of_requests_per_country}}}
-    check_error(result)
+    return check_error(result)
 
 @app.route('/metries_yesterday/<types>')
 def index4(types):
@@ -255,39 +255,39 @@ def index4(types):
     if types == 'suc_req':
         Successful_requests = make_query('Select Successful_requests from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Successful_requests':Successful_requests}
-        check_error(result)
+        return check_error(result)
     elif types == 'unq_us':
         Unique_users = make_query('Select Unq_users from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Unique_users':Unique_users}
-        check_error(result)
+        return check_error(result)
     elif types == 'countries':
         Countries = make_query('Select Countries from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Countries':Countries}
-        check_error(result)
+        return check_error(result)
     elif types == 'tod_us':
         Today_users = make_query('Select Today_users from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Today_users':Today_users}
-        check_error(result)
+        return check_error(result)
     elif types == 'Vis_vis_page':
         Visitings_of_the_most_visited_page = make_query('Select Visiting_most_visited_page from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Visitings_of_the_most_visited_page':Visitings_of_the_most_visited_page}
-        check_error(result)
+        return check_error(result)
     elif types == 'top_req_h':
         Top_requests_hour = make_query('Select Top_requests_hour from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Top_requests_hour':Top_requests_hour}
-        check_error(result)
+        return check_error(result)
     elif types == 'top_unq_us_h':
         Top_unique_users_hour = make_query('Select Top_unique_users_hour from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Top_unique_users_hour':Top_unique_users_hour}
-        check_error(result)
+        return check_error(result)
     elif types == 'unq_og_sites':
         Unique_outgoing_sites = make_query('Select Unq_outgoing_sites from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'Unique_outgoing_sites':Unique_outgoing_sites}
-        check_error(result)
+        return check_error(result)
     elif types == 'eng_trans':
         English_translatings = make_query('Select English_translatings from Metries_int where Date ="' + date + '"')[0][0]
         result = {'Date':date, 'English_translatings':English_translatings}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'unq_us_country':
         Unique_users_per_country3 = make_query('Select Unq_users_per_country from Metries_countries where Date ="' + date + '"')[0][0]
@@ -302,7 +302,7 @@ def index4(types):
             else:
                 Unique_users_per_country[Unique_users_per_country1[0]] = int(Unique_users_per_country1[1])
         result = {'Date':date, 'Unique_users_per_country':Unique_users_per_country}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'req_country':
         Requests_per_country3 = make_query('Select Requests_per_country from Metries_countries where Date ="' + date + '"')[0][0]
@@ -317,7 +317,7 @@ def index4(types):
             else:
                 Requests_per_country[Requests_per_country1[0]] = int(Requests_per_country1[1])
         result = {'Date':date, 'Requests_per_country':Requests_per_country}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'ave_req_country':
         Average_num_of_requests_per_country3 = make_query('Select Average_num_of_requests_per_country from Metries_countries where Date ="' + date + '"')[0][0]
@@ -332,7 +332,7 @@ def index4(types):
             else:
                 Average_num_of_requests_per_country[Average_num_of_requests_per_country1[0]] = float(Average_num_of_requests_per_country1[1])
         result = {'Date':date, 'Average_num_of_requests_per_country':Average_num_of_requests_per_country}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'int':
         Successful_requests, Unique_users, Countries, Today_users, Visitings_of_the_most_visited_page, Top_requests_hour, Top_unique_users_hour, Unique_outgoing_sites, English_translatings = chislo(date)
@@ -347,7 +347,7 @@ def index4(types):
                          'Top_unique_users_hour': Top_unique_users_hour,
                          'Unique_outgoing_sites': Unique_outgoing_sites,
                          'English_translatings': English_translatings}}
-        check_error(result)
+        return check_error(result)
 
     elif types == 'str':
 
@@ -357,7 +357,7 @@ def index4(types):
                   'str':{'Unique_users_per_country':Unique_users_per_country,
                          'Requests_per_country': Requests_per_country,
                          'Average_num_of_requests_per_country':Average_num_of_requests_per_country}}
-        check_error(result)
+        return check_error(result)
 
     else:
         abort(404)
@@ -431,7 +431,7 @@ def index5():
                                 'Requests_per_country': Requests_per_country,
                                 'Average_num_of_requests_per_country': Average_num_of_requests_per_country}}}
 
-    check_error(result)
+    return check_error(result)
 
 @app.errorhandler(404)
 def not_found(error):
