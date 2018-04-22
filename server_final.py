@@ -107,7 +107,7 @@ def index():
                                   'Requests_per_country': Requests_per_country,
                                   'Average_num_of_requests_per_country':Average_num_of_requests_per_country}}}
 
-    get_error(result)
+    check_error(result)
 
 
 @app.route('/metries/<types>')
